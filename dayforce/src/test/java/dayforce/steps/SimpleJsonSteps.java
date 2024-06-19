@@ -24,10 +24,10 @@ public class SimpleJsonSteps {
     @Then("Verify the JSON object")
     public void verify_json_object() {
         if(jsonNode != null) {
-            System.out.printf("Parsed json object");
+            System.out.print("Parsed json object");
             System.out.printf("json: %s", jsonNode.toPrettyString());
         } else {
-            System.out.printf("Error: json object is null");
+            System.out.print("Error: json object is null");
         }
     }
 }

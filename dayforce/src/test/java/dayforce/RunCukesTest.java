@@ -5,6 +5,6 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(tags = "@db")
+@CucumberOptions(tags = "@xray")
 public class RunCukesTest {
 }

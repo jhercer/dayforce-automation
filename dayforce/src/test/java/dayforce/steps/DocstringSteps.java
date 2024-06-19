@@ -7,7 +7,7 @@ import io.cucumber.java.DocStringType;
 import io.cucumber.java.en.Given;
 
 public class DocstringSteps {
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     @DocStringType
     public JsonNode json(String docString) throws JsonProcessingException {

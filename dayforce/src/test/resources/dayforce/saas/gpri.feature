@@ -1,4 +1,4 @@
-@gpri
+@xray
 Feature: gpri
   Scenario: a GPRI post
     Given a gpri
