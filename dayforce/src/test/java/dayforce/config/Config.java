@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
@@ -35,6 +36,7 @@ public class Config {
     }
 
     @Bean
+    @Lazy
     public Properties properties() {
         return new Properties();
     }
@@ -60,15 +62,23 @@ public class Config {
     public DayforceLoginPage loginPage() { return new DayforceLoginPage(properties().getDayforceLoginPageUrl(), localDriver(), 15); }
 
     @Bean
+    @Lazy
     public Client client() { return new Client(); }
 
     @Bean
+    @Lazy
     public DataSource devmsDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(properties().getDataSourceDriverClassName());
-        dataSource.setUrl(properties().getDatasourceUrl());
-        dataSource.setUsername(properties().getDatasourceUsername());
-        dataSource.setPassword(properties().getDatasourcePassword());
+        dataSource.setUrl(properties().getDatasourceUrlDevms());
+        dataSource.setUsername(properties().getDatasourceUsernameDevms());
+        dataSource.setPassword(properties().getDatasourcePasswordDevms());
         return dataSource;
+    }
+
+    @Bean
+    @Lazy
+    public JdbcTemplate jdbcTemplateDevms(DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
     }
 }
