@@ -12,10 +12,17 @@ import java.util.logging.Logger;
 public class Client {
     private static final Logger LOGGER = Logger.getAnonymousLogger();
     private final Context CONTEXT = Context.CONTEXT;
-    public void post(String path, String username, String password) {
+
+    public void post(String apiPath, String bearer) {
+        post(apiPath, null, null, bearer);
+    }
+
+    public void post(String path, String username, String password, String bearer) {
         final String url = CONTEXT.getUrl() + path;
         final RequestSpecification requestSpecification = CONTEXT.getRequest();
         final Object payload = CONTEXT.getPayload();
+
+        if(bearer != null) requestSpecification.header("Authorization", "Bearer " + bearer);
 
         if(username != null && password != null) {
             String auth = Base64.getEncoder().encodeToString((username + ":" + password).getBytes());

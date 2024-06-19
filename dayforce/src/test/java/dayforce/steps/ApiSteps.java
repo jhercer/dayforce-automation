@@ -21,7 +21,7 @@ public class ApiSteps {
     public void a_simple_api_test() {
         client.getCONTEXT().setUrl(properties.getJsonPlaceHolderUrl());
         client.getCONTEXT().setPayload(PAYLOAD);
-        client.post("/posts", null, null);
+        client.post("/posts", null, null, null);
         JsonPlaceholderResponse response = client.getCONTEXT().getResponse().jsonPath().getObject("$", JsonPlaceholderResponse.class);
         System.out.printf("title on response is \"%s\"\n", response.getTitle());
     }

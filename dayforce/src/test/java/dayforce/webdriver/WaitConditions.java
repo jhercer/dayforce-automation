@@ -31,7 +31,7 @@ public class WaitConditions {
 
             @Override
             public String toString() {
-                return String.format("Page contains \"%s\"");
+                return "Page contains \"%s\"";
             }
         };
     }
