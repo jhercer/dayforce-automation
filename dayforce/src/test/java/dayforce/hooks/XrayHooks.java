@@ -1,8 +1,15 @@
 package dayforce.hooks;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import dayforce.entities.TestExecution;
 import dayforce.rest.Client;
 import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class XrayHooks {
 
@@ -36,9 +43,32 @@ public class XrayHooks {
     private Client client;
 
     @After(value = "@xray", order = 1000)
-    public void token() {
+    @SneakyThrows
+    public void publishResults(Scenario scenario) {
+        // get token
         client.getCONTEXT().setUrl(BASE_URL);
         client.getCONTEXT().setPayload(AUTHENTICATE_PAYLOAD);
-        client.post("/api/v2/authenticate", null, null);
+        client.post("/api/v2/authenticate", null, null, null);
+        // map test execution
+        ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        TestExecution testExecution = mapper.readValue(TEST_EXEC_PAYLOAD, TestExecution.class);
+        testExecution.getInfo().setStartDate(getCurrentDateTime());
+        testExecution.getTests().get(0).setStart(getCurrentDateTime());
+        // get status
+        if("PASSED".equals(scenario.getStatus())) {
+            testExecution.getTests().get(0).setStatus(String.valueOf(TestExecution.Test.Status.PASSED));
+            testExecution.getTests().get(0).setFinish(getCurrentDateTime());
+        } else {
+            testExecution.getTests().get(0).setStatus(String.valueOf(TestExecution.Test.Status.FAILED));
+        }
+
+        client.getCONTEXT().setPayload(testExecution);
+        client.post("/api/v2/import/execution", client.getCONTEXT().getResponse().asString().replace("\"", ""));
+    }
+
+    public static String getCurrentDateTime() {
+        ZonedDateTime now = ZonedDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
+        return now.format(formatter);
     }
 }

@@ -39,7 +39,7 @@ public class GpriSteps {
         // set the payload
         client.getCONTEXT().setPayload(payrunImportWrapper);
         // invoke a post with basic auth
-        client.post("/saas/gpri/qaextx2_1615501", properties.getKafkaUser(), properties.getKafkaPsw());
+        client.post("/saas/gpri/qaextx2_1615501", properties.getKafkaUser(), properties.getKafkaPsw(), null);
     }
     @Then("a job must been queued")
     public void a_job_must_been_queued() {
