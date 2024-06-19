@@ -6,11 +6,15 @@ import dayforce.pages.Google;
 import dayforce.rest.Client;
 import dayforce.webdriver.LocalDriver;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
+
+import javax.sql.DataSource;
 
 @Configuration
 public class Config {
@@ -57,4 +61,14 @@ public class Config {
 
     @Bean
     public Client client() { return new Client(); }
+
+    @Bean
+    public DataSource devmsDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(properties().getDataSourceDriverClassName());
+        dataSource.setUrl(properties().getDatasourceUrl());
+        dataSource.setUsername(properties().getDatasourceUsername());
+        dataSource.setPassword(properties().getDatasourcePassword());
+        return dataSource;
+    }
 }

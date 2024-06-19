@@ -39,7 +39,18 @@ public class Properties {
     @Value("${dayforce.username}")
     private String dayforceUser;
 
-
     @Value("${dayforce.password}")
     private String dayforcePassword;
+
+    @Value("${devmsdbserver1.datasource.url}")
+    private String datasourceUrlDevms;
+
+    @Value("${devmsdbserver1.username}")
+    private String datasourceUsernameDevms;
+
+    @Value("${devmsdbserver1.password}")
+    private String datasourcePasswordDevms;
+
+    @Value("${devmsdbserver1.datasource.driver-class-name}")
+    private String dataSourceDriverClassName;
 }
