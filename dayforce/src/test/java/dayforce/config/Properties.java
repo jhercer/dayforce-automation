@@ -45,12 +45,13 @@ public class Properties {
     @Value("${devmsdbserver1.datasource.url}")
     private String datasourceUrlDevms;
 
-    @Value("${devmsdbserver1.username}")
+    @Value("${devmsdbserver1.datasource.username}")
     private String datasourceUsernameDevms;
 
-    @Value("${devmsdbserver1.password}")
+    @Value("${devmsdbserver1.datasource.password}")
     private String datasourcePasswordDevms;
 
     @Value("${devmsdbserver1.datasource.driver-class-name}")
     private String dataSourceDriverClassName;
+
 }

@@ -5,10 +5,9 @@ import dayforce.pages.DayforceLoginPage;
 import dayforce.pages.Google;
 import dayforce.rest.Client;
 import dayforce.webdriver.LocalDriver;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+    import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
@@ -36,37 +35,30 @@ public class Config {
     }
 
     @Bean
-    @Lazy
     public Properties properties() {
         return new Properties();
     }
 
     @Bean
-    @Lazy
     public LocalDriver localDriver() {
         return new LocalDriver(properties().getBrowser(), false, null);
     }
 
     @Bean
-    @Lazy
     public Google googlePage() {
         return new Google(properties().getBaseUrl(), localDriver(), 10);
     }
 
     @Bean
-    @Lazy
     public Bing bingPage() { return new Bing(properties().getBingBaseUrl(), localDriver(), 10); }
 
     @Bean
-    @Lazy
     public DayforceLoginPage loginPage() { return new DayforceLoginPage(properties().getDayforceLoginPageUrl(), localDriver(), 15); }
 
     @Bean
-    @Lazy
     public Client client() { return new Client(); }
 
     @Bean
-    @Lazy
     public DataSource devmsDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(properties().getDataSourceDriverClassName());
@@ -77,7 +69,7 @@ public class Config {
     }
 
     @Bean
-    @Lazy
+    @Qualifier("devms")
     public JdbcTemplate jdbcTemplateDevms(DataSource dataSource) {
         return new JdbcTemplate(dataSource);
     }
