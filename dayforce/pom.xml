@@ -16,6 +16,7 @@
     <cukes.version>7.14.0</cukes.version>
     <jackson.version>2.13.0</jackson.version>
     <junit.version>4.11</junit.version>
+    <mssql.jdbc.version>12.6.1.jre11</mssql.jdbc.version>
     <selenium.version>4.15.0</selenium.version>
   </properties>
   <dependencies>
@@ -72,6 +73,11 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>${mssql.jdbc.version}</version>
     </dependency>
   </dependencies>
   <build>
