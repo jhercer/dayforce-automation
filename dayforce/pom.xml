@@ -16,6 +16,7 @@
     <cukes.version>7.14.0</cukes.version>
     <jackson.version>2.13.0</jackson.version>
     <junit.version>4.11</junit.version>
+    <microsoft.sql.version>12.6.2.jre11</microsoft.sql.version>
     <selenium.version>4.15.0</selenium.version>
   </properties>
   <dependencies>
@@ -23,6 +24,11 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jdbc</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -72,6 +78,11 @@
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>${jackson.version}</version>
+    </dependency>
+   <dependency>
+      <groupId>com.microsoft.sqlserver</groupId>
+      <artifactId>mssql-jdbc</artifactId>
+      <version>${microsoft.sql.version}</version>
     </dependency>
   </dependencies>
   <build>
