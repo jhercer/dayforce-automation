@@ -39,4 +39,3 @@ Feature: gpri
     """
     When I call a post
     Then a job must been queued
-    #And I login into DayForce as an admin

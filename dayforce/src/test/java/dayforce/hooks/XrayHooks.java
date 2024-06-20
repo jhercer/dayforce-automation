@@ -25,7 +25,7 @@ public class XrayHooks {
         authenticateClient();
         String currentDateTime = getCurrentDateTime();
         TestExecution testExecution = mapTestExecution(currentDateTime, currentDateTime); // Assuming start and end are the same for simplicity
-        updateTestExecutionStatus(scenario, testExecution);
+        updateTestExecutionStatus(scenario.getStatus().toString(), testExecution);
         postTestExecution(testExecution);
     }
 
@@ -46,10 +46,7 @@ public class XrayHooks {
         return testExecution;
     }
 
-    private void updateTestExecutionStatus(Scenario scenario, TestExecution testExecution) {
-        String status = scenario.getStatus().equals("PASSED") ?
-                TestExecution.Test.Status.PASSED.name() :
-                TestExecution.Test.Status.FAILED.name();
+    private void updateTestExecutionStatus(String status, TestExecution testExecution) {
         testExecution.getTests().get(0).setStatus(status);
         if ("PASSED".equals(status)) {
             testExecution.getTests().get(0).setFinish(getCurrentDateTime());
