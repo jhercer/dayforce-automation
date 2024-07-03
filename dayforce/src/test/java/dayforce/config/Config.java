@@ -53,7 +53,7 @@ public class Config {
     public Bing bingPage() { return new Bing(properties().getBingBaseUrl(), localDriver(), 10); }
 
     @Bean
-    public DayforceLoginPage loginPage() { return new DayforceLoginPage(properties().getDayforceLoginPageUrl(), localDriver(), 15); }
+    public DayforceLoginPage loginPage() { return new DayforceLoginPage(properties().getDayforceLoginPageUrl(), localDriver(), 120); }
 
     @Bean
     public Client client() { return new Client(); }

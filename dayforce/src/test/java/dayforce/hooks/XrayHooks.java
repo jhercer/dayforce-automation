@@ -47,9 +47,10 @@ public class XrayHooks {
     }
 
     private void updateTestExecutionStatus(Scenario scenario, TestExecution testExecution) {
-        String status = scenario.getStatus().equals("PASSED") ?
+        String status = scenario.getStatus().name().equals("PASSED") ?
                 TestExecution.Test.Status.PASSED.name() :
                 TestExecution.Test.Status.FAILED.name();
+
         testExecution.getTests().get(0).setStatus(status);
         if ("PASSED".equals(status)) {
             testExecution.getTests().get(0).setFinish(getCurrentDateTime());
